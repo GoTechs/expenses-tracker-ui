@@ -1,0 +1,12 @@
+export const API = "API";
+export const API_START = "API_START";
+export const API_END = "API_END";
+export const API_ERROR = "API_ERROR";
+export const GET_ALL_EXPENSES = "GET_ALL_EXPENSES";
+export const REQUEST_ALL_EXPENSES = "REQUEST_ALL_EXPENSES";
+export const REMOVE_EXPENSE = "REMOVE_EXPENSE";
+export const REQUEST_REMOVE_EXPENSE = "REQUEST_REMOVE_EXPENSE";
+export const SET_EXPENSE = "SET_EXPENSE";
+export const REQUEST_SET_EXPENSE = "REQUEST_SET_EXPENSE";
+export const ADD_EXPENSE = "ADD_EXPENSE";
+export const REQUEST_ADD_EXPENSE = "REQUEST_ADD_EXPENSE";
