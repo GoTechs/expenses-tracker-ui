@@ -1,0 +1,17 @@
+.forget-password-container, .delete-expense-modal {
+    display: flex;
+    flex-direction: column;
+}
+.delete-expense-modal {
+    align-items: center;
+}
+.delete-expense-modal > p {
+    text-align: center;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+}
+#add-expense-btn {
+    align-self: flex-end;
+}
