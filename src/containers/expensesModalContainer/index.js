@@ -46,14 +46,12 @@ class AddExpensesModal extends Component {
     loading: false,
   };
  
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.selectedExpense !== prevState.selectedExpense) {
-      const formData = { ...prevState.formConfig };
-      console.log(nextProps.selectedExpense)
-      formData["amount"].value = _.get(nextProps, "selectedExpense.amount");
-      formData["description"].value = _.get(nextProps, "selectedExpense.description");;
-      return { formConfig: formData };
-    }
+  componentDidMount(){
+    console.log(this.props)
+    const formData = { ...this.state.formConfig };
+    formData["amount"].value = _.get(this.props, "selectedExpense.amount");
+    formData["description"].value = _.get(this.props, "selectedExpense.description");
+    this.setState({formConfig: formData})
   }
 
   inputChangedHandler = (e) => {
@@ -106,8 +104,9 @@ class AddExpensesModal extends Component {
 
   render() {
     const { formConfig } = this.state;
-    const { showAddExpense, showEditExpense, selectedExpense } = this.props;
+    const { showAddExpense, showEditExpense } = this.props;
     const show = showEditExpense ? showEditExpense : showAddExpense;
+    console.log(this.state);
     return (
       <div className="add-expense-modal">
         <AddModalContainer
