@@ -1,4 +1,6 @@
 import * as ACTION_TYPES from "./../actions/types";
+import _ from "lodash";
+import produce from "immer";
 
 const initialState = {
   expenses: null,
@@ -19,9 +21,15 @@ export function expensesReducer(state = initialState, action) {
         ),
       };
     case ACTION_TYPES.SET_EXPENSE:
-      return {
-        ...state,
-      };
+      return produce(state, (draft) => {
+        const id = _.get(action.payload, "expense._id");
+        const indexExpense = state.expenses.indexOf(
+          state.expenses.find((exp) => exp._id === id)
+        );
+        if (indexExpense > -1) {
+          draft.expenses[indexExpense] = action.payload.expense;
+        }
+      });
     case ACTION_TYPES.ADD_EXPENSE:
       return {
         ...state,

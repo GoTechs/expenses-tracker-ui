@@ -15,7 +15,7 @@ export const getTotalTax = createSelector([getExpensesData], (expenses) => {
 export const selectExpenseById = createSelector(
   [getExpensesData],
   (expenses) => (id) => {
-    return expenses.find((item) => item._id === id) ;
+    return expenses && expenses.find((item) => item._id === id);
   }
 );
 

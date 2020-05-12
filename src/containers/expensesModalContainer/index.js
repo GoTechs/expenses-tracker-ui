@@ -44,25 +44,41 @@ class AddExpensesModal extends Component {
     },
     isValidForm: false,
     loading: false,
+    expenseId: null,
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedExpense !== this.props.selectedExpense) {
+    // handle edit form
+    if (nextProps.showEditExpense !== this.props.showEditExpense) {
       const formData = { ...this.state.formConfig };
       formData["amount"].value = _.get(nextProps, "selectedExpense.amount");
       formData["description"].value = _.get(
         nextProps,
         "selectedExpense.description"
       );
-      this.setState({ formConfig: formData });
+      formData["amount"].valid = true;
+      formData["description"].valid = true;
+      const expenseId = _.get(nextProps, "selectedExpense._id");
+      this.setState({ formConfig: formData, expenseId, isValidForm: true });
+    } else {
+      this.resetState();
     }
   }
+  resetState = () => {
+    const formConfigData = { ...this.state.formConfig };
+    formConfigData["amount"].value = "";
+    formConfigData["description"].value = "";
+    this.setState({
+      expenseId: null,
+      formConfig: formConfigData,
+      isValidForm: false,
+    });
+  };
 
   inputChangedHandler = (e) => {
     const value = e.target.value;
     const name = e.target.name;
     let formIsValid = true;
-    console.log(value, name);
     const updateFormConfig = { ...this.state.formConfig };
     updateFormConfig[name].value = value;
     updateFormConfig[name].touched = true;
@@ -83,7 +99,7 @@ class AddExpensesModal extends Component {
       isValid = value.trim() !== "" && isValid;
     }
     if (rules.isNumeric) {
-      const pattern = /^\d+$/;
+      const pattern = /^\d+(\.\d{0,9})?$/;
       isValid = pattern.test(value) && isValid;
     }
     return isValid;
@@ -92,7 +108,7 @@ class AddExpensesModal extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {};
-    const { isValidForm } = this.state;
+    const { isValidForm, expenseId } = this.state;
     const formConfigData = { ...this.state.formConfig };
     if (isValidForm) {
       Object.keys(formConfigData).forEach(
@@ -100,21 +116,20 @@ class AddExpensesModal extends Component {
           (formData[identifier] = formConfigData[identifier].value)
       );
       this.props.showEditExpense
-        ? this.props.editExpense(formData)
+        ? this.props.editExpense(formData, expenseId)
         : this.props.addExpense(formData);
       this.props.closeModal();
     }
   };
 
   render() {
-    const { formConfig } = this.state;
+    const { formConfig, isValidForm } = this.state;
     const { showAddExpense, showEditExpense } = this.props;
-    const show = showEditExpense ? showEditExpense : showAddExpense;
-    console.log(this.state);
+    const showMode = showEditExpense ? showEditExpense : showAddExpense;
     return (
       <div className="add-expense-modal">
         <AddModalContainer
-          show={show}
+          show={showMode}
           onHide={this.props.closeModal}
           title={showEditExpense ? " Edit expense" : "Add new expense"}
         >
@@ -138,7 +153,7 @@ class AddExpensesModal extends Component {
               <Button cancel onClick={this.props.closeModal}>
                 Cancel
               </Button>
-              <Button primary type="submit" disabled={!this.state.isValidForm}>
+              <Button primary type="submit" disabled={!isValidForm}>
                 Submit
               </Button>
             </div>
@@ -157,9 +172,10 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    editExpense: (id) => dispatch(actions.expensesActions.editExpense(id)),
-    addExpense: (datForm) =>
-      dispatch(actions.expensesActions.addExpense(datForm)),
+    editExpense: (dataForm, id) =>
+      dispatch(actions.expensesActions.editExpense(dataForm, id)),
+    addExpense: (dataForm) =>
+      dispatch(actions.expensesActions.addExpense(dataForm)),
   };
 };
 

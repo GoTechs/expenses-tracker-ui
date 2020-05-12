@@ -40,17 +40,21 @@ export const removeExpense = (id) => {
     label: ACTION_TYPES.REQUEST_REMOVE_EXPENSE,
   });
 };
-export const editExpense = (id) => {
+export const editExpense = (data, id) => {
   const url = `/expense/${id}`;
   return apiAction({
     url,
     method: "PUT",
-    onSuccess: (data) => ({
-      type: ACTION_TYPES.SET_EXPENSE,
-      payload: {
-        data,
-      },
-    }),
+    data,
+    onSuccess: ({ expense, message }) => {
+      toast.success(message);
+      return {
+        type: ACTION_TYPES.SET_EXPENSE,
+        payload: {
+          expense,
+        },
+      };
+    },
     onFailure: () => {
       console.log("An error occured while editing expense");
     },
