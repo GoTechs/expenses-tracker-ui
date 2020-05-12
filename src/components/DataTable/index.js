@@ -2,7 +2,7 @@ import React from "react";
 import ExpenseRow from "../ExpenseRow";
 
 const dataTable = (props) => {
-  const { expenses, openAddOrEditExpense, onDeleteClicked } = props;
+  const { expenses, openAddModal, onDeleteClicked, openEditModal} = props;
   return (
     <div className="table-responsive">
       <table className="table">
@@ -21,7 +21,7 @@ const dataTable = (props) => {
                 key={expense._id}
                 expense={expense}
                 onDeleteClicked={onDeleteClicked}
-                openAddOrEditExpense={openAddOrEditExpense}
+                openEditModal={openEditModal}
               />
             ))
           ) : (

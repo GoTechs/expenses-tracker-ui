@@ -1,0 +1,18 @@
+.Loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+    opacity: 0.8;
+    z-index: 999999;
+    text-align: center;
+    padding-top: 30%;
+}
+  
+.Loading img {
+    width: 100px;
+    height: auto;
+    display: inline-block;
+  }
