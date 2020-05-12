@@ -7,6 +7,21 @@
 
 - Clone this repo to your local machine using `https://github.com/GoTechs/expenses-tracker-ui.git`
 
+### Built With:
+ES6
+React
+CSS
+webpack 
+babel
+axios 
+loadash
+Redux 
+Redux-thunk
+Immer  (immutable)
+Reselect (memoization)
+jest 24.7.x . (Unit Testing)
+enzyme 1.11.x (Unit Testing)
+
 ### Setup
 
 > To get started...
