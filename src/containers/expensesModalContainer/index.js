@@ -45,13 +45,17 @@ class AddExpensesModal extends Component {
     isValidForm: false,
     loading: false,
   };
- 
-  componentDidMount(){
-    console.log(this.props)
-    const formData = { ...this.state.formConfig };
-    formData["amount"].value = _.get(this.props, "selectedExpense.amount");
-    formData["description"].value = _.get(this.props, "selectedExpense.description");
-    this.setState({formConfig: formData})
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedExpense !== this.props.selectedExpense) {
+      const formData = { ...this.state.formConfig };
+      formData["amount"].value = _.get(nextProps, "selectedExpense.amount");
+      formData["description"].value = _.get(
+        nextProps,
+        "selectedExpense.description"
+      );
+      this.setState({ formConfig: formData });
+    }
   }
 
   inputChangedHandler = (e) => {
@@ -135,7 +139,7 @@ class AddExpensesModal extends Component {
                 Cancel
               </Button>
               <Button primary type="submit" disabled={!this.state.isValidForm}>
-                Confirm
+                Submit
               </Button>
             </div>
           </form>

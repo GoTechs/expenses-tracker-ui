@@ -18,7 +18,7 @@ class ExpensesTracker extends Component {
     showEditExpense: false,
     loading: false,
     expenseId: null,
-    selectedExpense: null
+    selectedExpense: null,
   };
 
   componentDidMount() {
@@ -30,12 +30,12 @@ class ExpensesTracker extends Component {
       showConfirmationModal: false,
       showAddExpense: false,
       showEditExpense: false,
-      selectedExpense: null
+      selectedExpense: null,
     });
   };
 
   openConfirmationModal = (id) => {
-    this.setState({ showConfirmationModal: true});
+    this.setState({ showConfirmationModal: true, expenseId: id });
   };
   openAddModal = () => {
     this.setState({ showAddExpense: true });
@@ -44,7 +44,7 @@ class ExpensesTracker extends Component {
     const selectedExpense = this.props.selectExpenseById(id);
     this.setState({ showEditExpense: true, expenseId: id, selectedExpense });
   };
- 
+
   confirmDeleteClicked = () => {
     const { expenseId } = this.state;
     this.props.removeExpense(expenseId);
@@ -55,7 +55,7 @@ class ExpensesTracker extends Component {
       showConfirmationModal,
       showAddExpense,
       showEditExpense,
-      selectedExpense
+      selectedExpense,
     } = this.state;
     return (
       <div className="expenses-tracker-container">
@@ -78,7 +78,6 @@ class ExpensesTracker extends Component {
           onDeleteClicked={this.openConfirmationModal}
           openAddModal={this.openAddModal}
           openEditModal={this.openEditModal}
-          
         />
         <ExpensesModal
           showAddExpense={showAddExpense}
@@ -114,7 +113,7 @@ const mapStateToProps = (state) => {
     expenses: _.get(state, "expensesReducer.expenses"),
     sumExpenses: expensesSelector.getSumExpenses(state),
     getTotalTax: expensesSelector.getTotalTax(state),
-    selectExpenseById: (id) => expensesSelector.selectExpenseById(state)(id)
+    selectExpenseById: (id) => expensesSelector.selectExpenseById(state)(id),
   };
 };
 const mapDispatchToProps = (dispatch) => {
