@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import ExpenseRow from "../ExpenseRow";
 
 const dataTable = (props) => {
-  const { expenses, onEditClicked, onDeleteClicked } = props;
+  const { expenses, openAddOrEditExpense, onDeleteClicked } = props;
   return (
     <div className="table-responsive">
       <table className="table">
@@ -21,8 +20,8 @@ const dataTable = (props) => {
               <ExpenseRow
                 key={expense._id}
                 expense={expense}
-                onEditClicked={onEditClicked}
                 onDeleteClicked={onDeleteClicked}
+                openAddOrEditExpense={openAddOrEditExpense}
               />
             ))
           ) : (

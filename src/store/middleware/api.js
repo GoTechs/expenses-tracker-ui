@@ -2,7 +2,6 @@ import axios from "axios";
 import * as ACTION_TYPES from "../actions/types";
 import { apiError, apiStart, apiEnd } from "../actions/apiActions.js";
 
-
 const apiMiddleware = ({ dispatch }) => (next) => (action) => {
   if (!action) {
     return;
@@ -16,7 +15,7 @@ const apiMiddleware = ({ dispatch }) => (next) => (action) => {
     onSuccess,
     onFailure,
     label,
-    headers
+    headers,
   } = action.payload;
   const dataOrParams = ["GET", "DELETE"].includes(method) ? "params" : "data";
 
