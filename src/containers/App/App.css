@@ -1,0 +1,27 @@
+.App {
+  max-width: 900px;
+  margin: 100px auto;
+}
+
+h1 {
+  font-family: "Roboto";
+  color: #484B52;
+  font-size: 35px;
+  margin: 5px;
+}
+p {
+  font-family: "Roboto";
+  color: #92908F;
+  font-size: 20px;
+  margin: 5px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+

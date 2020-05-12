@@ -1,0 +1,7 @@
+.expense-row > .btns-group {
+     margin-left: 50px;
+     float: right;
+}  
+.table td {
+  border: none !important;
+}
