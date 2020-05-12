@@ -1,9 +1,3 @@
-/**
- *
- * Button
- *
- */
-
 import React from "react";
 import PropTypes from "prop-types";
 import { isEmpty } from "lodash";
@@ -11,8 +5,6 @@ import cn from "classnames";
 import "./styles.css";
 
 const Button = (props) => {
-  
-
   const label =
     !isEmpty(props.label) && !props.children ? (
       <span>{props.label}</span>

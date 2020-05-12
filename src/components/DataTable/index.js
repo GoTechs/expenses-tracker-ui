@@ -2,7 +2,7 @@ import React from "react";
 import ExpenseRow from "../ExpenseRow";
 
 const dataTable = (props) => {
-  const { expenses, openAddModal, onDeleteClicked, openEditModal} = props;
+  const { expenses, onDeleteClicked, openEditModal } = props;
   return (
     <div className="table-responsive">
       <table className="table">
@@ -15,7 +15,7 @@ const dataTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {expenses ? (
+          {expenses && expenses.length > 0 ? (
             expenses.map((expense) => (
               <ExpenseRow
                 key={expense._id}

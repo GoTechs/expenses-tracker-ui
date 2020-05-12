@@ -20,7 +20,7 @@ button:disabled {
     background-color: #86b385;
     box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.15)
 }
-.primary {
+.primary, .confirm {
     background-color: #4A9147;
     color: #fff;
 }
@@ -28,7 +28,7 @@ button:disabled {
     background-color: #CC444C;
     color: #fff;
 }
-.edit, .confirm {
+.edit {
     background-color: #F7C345;
     color: #2D2D2B; 
 }

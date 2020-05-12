@@ -1,7 +1,9 @@
 .expense-row > .btns-group {
      margin-left: 50px;
      float: right;
+     padding: 5px;
 }  
 .table td {
+  padding: .5rem !important;
   border: none !important;
 }
